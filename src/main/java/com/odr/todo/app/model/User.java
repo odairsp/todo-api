@@ -1,6 +1,7 @@
 package com.odr.todo.app.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
 

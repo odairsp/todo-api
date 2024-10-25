@@ -9,9 +9,9 @@ public interface TaskService {
 
     Task findById(Long id);
 
-    Task insert(Task cliente);
+    Task insert(Task task);
 
-    Task update(Long id, Task cliente);
+    Task update(Long id, Task task);
 
     void delete(Long id);
 }
