@@ -4,23 +4,24 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import java.util.List;
-
-@Entity(name = "tb_user")
 @Getter
+@Setter
+@Entity(name = "tb_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private @Setter String name;
+    private String name;
 
     @Column(unique = true)
-    private @Setter String email;
+    private String email;
 
-    private @Setter String password;
+    private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<Task> tasks;
+        private List<Task> tasks;
 }

@@ -3,36 +3,47 @@ package com.odr.todo.app.controller;
 
 import com.odr.todo.app.model.Task;
 import com.odr.todo.app.model.User;
+import com.odr.todo.app.repository.TaskRepository;
 import com.odr.todo.app.service.TaskService;
 import com.odr.todo.app.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 
 @RestController
 @RequestMapping("/api/tasks")
 public class TaskController {
 
-    private final TaskService taskService;
-    private final UserService userService;
+    @Autowired
+    private TaskService taskService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private  TaskRepository taskRepository;
 
-    public TaskController(TaskService taskService, UserService userService) {
-        this.taskService = taskService;
-        this.userService = userService;
-    }
 
-    @GetMapping("user/{userId}")
-    public ResponseEntity<Task> create(@PathVariable Long userId, @RequestBody Task task){
+
+    @PostMapping("user/{userId}")
+    public ResponseEntity<Task> create(@PathVariable Long userId, @RequestBody Task task) {
         User user = userService.findById(userId);
-        if(user != null){
+        if (user != null) {
             task.setUser(user);
             Task createdTask = taskService.insert(task);
             return ResponseEntity.ok(createdTask);
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
+
+    }
+
+    @DeleteMapping("user/{taskId}")
+    public ResponseEntity<Task> delete(@PathVariable Long taskId) {
+
+        Task task = taskService.findById(taskId);
+        taskService.delete(taskId);
+
+        return ResponseEntity.ok(task);
     }
 
 

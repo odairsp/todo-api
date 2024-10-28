@@ -14,6 +14,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
     public TaskServiceImpl(TaskRepository taskRepository) {
+
         this.taskRepository = taskRepository;
     }
 
@@ -55,6 +56,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void delete(Long id) {
+
         taskRepository.deleteById(id);
     }
 }
