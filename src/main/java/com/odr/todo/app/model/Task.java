@@ -35,7 +35,6 @@ public class Task {
     private LocalDateTime completedAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     @JsonIgnoreProperties("tasks") // evita referencia circular para "select *"
     private User user;
 }
