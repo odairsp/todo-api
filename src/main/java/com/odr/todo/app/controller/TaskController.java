@@ -37,11 +37,11 @@ public class TaskController {
 
     }
 
-    @DeleteMapping("user/{taskId}")
-    public ResponseEntity<Task> delete(@PathVariable Long taskId) {
+    @DeleteMapping("user/{userId}/{taskId}")
+    public ResponseEntity<Task> delete(@PathVariable Long userId, @PathVariable Long taskId) {
 
         Task task = taskService.findById(taskId);
-        taskService.delete(taskId);
+        taskService.delete(userId, taskId);
 
         return ResponseEntity.ok(task);
     }
